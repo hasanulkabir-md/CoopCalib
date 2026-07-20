@@ -1,0 +1,54 @@
+% ─────────────────────────────────────────────────────────────
+% FIX 3 — TABLE 1 CAPTION (in table1_ablation.tex line 4)
+% Change "5-fold LOCO" to "per-subset protocol"
+% Change bold convention note
+% ─────────────────────────────────────────────────────────────
+ 
+% REPLACE the entire table1_ablation.tex with this corrected version:
+ 
+\begin{table}[t]
+\centering
+\caption{Results on ETH-UCY (per-subset protocol, 5 folds).
+         FPR~$=0.000$ for all variants and thresholds (omitted).
+         SVR (V2): ETH=0.835, HOT=0.945, UNV=0.989, ZR1=0.879, ZR2=0.961.
+         HOT=HOTEL, UNV=UNIV, ZR1=ZARA1, ZR2=ZARA2.
+         \textbf{Bold} = best per metric (ADE, FDE, SPSR only).}
+\label{tab:ablation}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{l l c c c c c | c}
+\toprule
+Variant & Losses & ETH & HOT & UNV & ZR1 & ZR2 & Avg \\
+\midrule
+\multicolumn{8}{l}{\textit{ECE~$\downarrow$ (first baseline — no bold; lower is better)}} \\
+V0 & -- & 0.6285 & 0.5219 & 0.5543 & 0.5152 & 0.5538 & 0.5547 \\
+V1 & $\mathcal{L}_{\text{ECE}}$ & 0.6408 & 0.5177 & 0.5504 & 0.5145 & 0.5545 & 0.5556 \\
+V2 & $\mathcal{L}_{\text{ECE}}+\mathcal{L}_{\text{energy}}$ & 0.6411 & 0.5191 & 0.5686 & 0.5167 & 0.5537 & 0.5598 \\
+\midrule
+\multicolumn{8}{l}{\textit{minADE~$\downarrow$~(m)}} \\
+V0 & -- & \textbf{0.4139} & \textbf{0.1244} & \textbf{0.2365} & \textbf{0.1888} & \textbf{0.1407} & \textbf{0.2209} \\
+V1 & $\mathcal{L}_{\text{ECE}}$ & 0.4221 & 0.1258 & 0.2380 & 0.1884 & 0.1411 & 0.2231 \\
+V2 & $\mathcal{L}_{\text{ECE}}+\mathcal{L}_{\text{energy}}$ & 0.4221 & 0.1278 & 0.2381 & 0.1895 & 0.1415 & 0.2238 \\
+\midrule
+\multicolumn{8}{l}{\textit{minFDE~$\downarrow$~(m)}} \\
+V0 & -- & 0.6291 & 0.1854 & 0.4309 & 0.3462 & 0.2535 & 0.3690 \\
+V1 & $\mathcal{L}_{\text{ECE}}$ & \textbf{0.6178} & \textbf{0.1834} & 0.4345 & \textbf{0.3441} & 0.2566 & \textbf{0.3673} \\
+V2 & $\mathcal{L}_{\text{ECE}}+\mathcal{L}_{\text{energy}}$ & 0.6180 & 0.1849 & \textbf{0.4358} & 0.3428 & \textbf{0.2578} & 0.3679 \\
+\midrule
+\multicolumn{8}{l}{\textit{SPSR~$\uparrow$}} \\
+V0 & -- & \textbf{0.3269} & \textbf{0.9265} & \textbf{0.6674} & \textbf{0.8570} & \textbf{0.8164} & \textbf{0.7188} \\
+V1 & $\mathcal{L}_{\text{ECE}}$ & 0.3214 & 0.9198 & 0.6655 & 0.8540 & 0.8091 & 0.7140 \\
+V2 & $\mathcal{L}_{\text{ECE}}+\mathcal{L}_{\text{energy}}$ & 0.3187 & 0.9198 & 0.6560 & 0.8544 & 0.8078 & 0.7113 \\
+\midrule
+\multicolumn{8}{l}{\textit{SocialVAE ADE~$\downarrow$~(m) — RQ3 ($N_{\text{train}}$ varies)}} \\
+V0 (N=500)  & -- & \multicolumn{5}{c}{ETH only} & 0.74 \\
+V3 (N=500)  & $\mathcal{L}_{\text{KL\_dyn}}$ & \multicolumn{5}{c}{ETH only} & 0.76 \\
+V0 (N=1000) & -- & \multicolumn{5}{c}{ETH only} & 0.72 \\
+V3 (N=1000) & $\mathcal{L}_{\text{KL\_dyn}}$ & \multicolumn{5}{c}{ETH only} & 0.75 \\
+V0 (N=1500) & -- & \multicolumn{5}{c}{ETH only} & 0.71 \\
+V3 (N=1500) & $\mathcal{L}_{\text{KL\_dyn}}$ & \multicolumn{5}{c}{ETH only} & 0.71 \\
+V0 (full)   & -- & \multicolumn{5}{c}{ETH only} & \textbf{0.73} \\
+V3 (full)   & $\mathcal{L}_{\text{KL\_dyn}}$ & \multicolumn{5}{c}{ETH only} & \textbf{0.72} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}

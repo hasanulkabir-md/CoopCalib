@@ -1,0 +1,71 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main_ral.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: IEEEtran.bst
+Reallocating 'name_of_file' (item size: 1) to 4 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: ref.bib
+Repeated entry---line 277 of file ref.bib
+ : @inproceedings{guo2017calibration
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 297 of file ref.bib
+ : @inproceedings{lucas2019elbo
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 318 of file ref.bib
+ : @inproceedings{mangalam2020pecnet
+ :                                  ,
+I'm skipping whatever remains of this entry
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+You've used 23 entries,
+            4087 wiz_defined-function locations,
+            952 strings with 12347 characters,
+and the built_in function-call counts, 22634 in all, are:
+= -- 1705
+> -- 613
+< -- 213
++ -- 364
+- -- 126
+* -- 1116
+:= -- 3006
+add.period$ -- 48
+call.type$ -- 23
+change.case$ -- 23
+chr.to.int$ -- 546
+cite$ -- 23
+duplicate$ -- 1522
+empty$ -- 1897
+format.name$ -- 125
+if$ -- 5371
+int.to.chr$ -- 0
+int.to.str$ -- 23
+missing$ -- 272
+newline$ -- 92
+num.names$ -- 23
+pop$ -- 679
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1734
+stack$ -- 0
+substring$ -- 1361
+swap$ -- 1303
+text.length$ -- 31
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 23
+warning$ -- 0
+while$ -- 99
+width$ -- 25
+write$ -- 240
+(There were 3 error messages)

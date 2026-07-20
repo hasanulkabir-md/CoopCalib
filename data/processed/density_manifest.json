@@ -1,0 +1,167 @@
+{
+  "eth": {
+    "mean_mnd_m": 2.2842,
+    "sparse": 382,
+    "medium": 332,
+    "dense": 85,
+    "total_frames": 799,
+    "scenes": [
+      {
+        "file": "biwi_eth.txt",
+        "mean_mnd_m": 2.2842,
+        "n_frames": 799
+      }
+    ],
+    "mnd_percentiles": {
+      "p10": 0.9905,
+      "p25": 1.2978,
+      "p50": 1.9366,
+      "p75": 2.7822,
+      "p90": 3.9397
+    }
+  },
+  "hotel": {
+    "mean_mnd_m": 1.9254,
+    "sparse": 341,
+    "medium": 606,
+    "dense": 137,
+    "total_frames": 1084,
+    "scenes": [
+      {
+        "file": "biwi_hotel.txt",
+        "mean_mnd_m": 1.9254,
+        "n_frames": 1084
+      }
+    ],
+    "mnd_percentiles": {
+      "p10": 0.9263,
+      "p25": 1.2121,
+      "p50": 1.6009,
+      "p75": 2.1525,
+      "p90": 3.0738
+    }
+  },
+  "univ": {
+    "mean_mnd_m": 0.9213,
+    "sparse": 0,
+    "medium": 241,
+    "dense": 744,
+    "total_frames": 985,
+    "scenes": [
+      {
+        "file": "students001.txt",
+        "mean_mnd_m": 0.8172,
+        "n_frames": 444
+      },
+      {
+        "file": "students003.txt",
+        "mean_mnd_m": 1.0067,
+        "n_frames": 541
+      }
+    ],
+    "mnd_percentiles": {
+      "p10": 0.7393,
+      "p25": 0.8001,
+      "p50": 0.8834,
+      "p75": 0.9952,
+      "p90": 1.131
+    }
+  },
+  "zara01": {
+    "mean_mnd_m": 1.7467,
+    "sparse": 231,
+    "medium": 413,
+    "dense": 217,
+    "total_frames": 861,
+    "scenes": [
+      {
+        "file": "crowds_zara01.txt",
+        "mean_mnd_m": 1.7467,
+        "n_frames": 861
+      }
+    ],
+    "mnd_percentiles": {
+      "p10": 0.8175,
+      "p25": 0.9972,
+      "p50": 1.3448,
+      "p75": 2.0645,
+      "p90": 3.0392
+    }
+  },
+  "zara02": {
+    "mean_mnd_m": 1.5221,
+    "sparse": 155,
+    "medium": 482,
+    "dense": 397,
+    "total_frames": 1034,
+    "scenes": [
+      {
+        "file": "crowds_zara02.txt",
+        "mean_mnd_m": 1.5221,
+        "n_frames": 1034
+      }
+    ],
+    "mnd_percentiles": {
+      "p10": 0.7773,
+      "p25": 0.8952,
+      "p50": 1.1046,
+      "p75": 1.4926,
+      "p90": 2.6562
+    }
+  },
+  "summary": {
+    "sparse": 1109,
+    "medium": 2074,
+    "dense": 1580,
+    "total_frames": 4763
+  },
+  "data_driven_tiers": {
+    "thresholds_m": {
+      "sparse_above": 2.0,
+      "dense_below": 1.0,
+      "note": "medium = 1.0 <= MND <= 2.0"
+    },
+    "tier_assignments": {
+      "sparse": [
+        "eth"
+      ],
+      "medium": [
+        "hotel",
+        "zara01",
+        "zara02"
+      ],
+      "dense": [
+        "univ"
+      ]
+    },
+    "vs_proposal": {
+      "hotel": {
+        "proposal": "dense",
+        "measured": "medium",
+        "mean_mnd_m": 1.9254,
+        "note": "Narrow corridor but low pedestrian count -> medium MND. Proposal assumed dense."
+      }
+    }
+  },
+  "sdd": {
+    "status": "preprocessed",
+    "format": "ethucy_txt",
+    "scale": 0.05,
+    "frame_skip": 12,
+    "train_files": 55,
+    "test_files": 5,
+    "total_persons": 4117,
+    "split": "PECNet_standard",
+    "path": "C:\\CoopCalib\\data\\processed\\sdd"
+  },
+  "trajnet_sample": {
+    "status": "ready",
+    "source": "ETH-UCY split_full",
+    "n_scenes": 50,
+    "avg_peds": 19.0,
+    "max_peds": 57,
+    "min_peds": 2,
+    "seed": 42,
+    "path": "C:\\CoopCalib\\data\\processed\\trajnet_sample"
+  }
+}

@@ -1,0 +1,352 @@
+[
+  {
+    "scene": 0,
+    "source": "students003.txt",
+    "n_peds": 30,
+    "frame_start": 2400,
+    "frame_end": 2590
+  },
+  {
+    "scene": 1,
+    "source": "crowds_zara02.txt",
+    "n_peds": 12,
+    "frame_start": 8370,
+    "frame_end": 8560
+  },
+  {
+    "scene": 2,
+    "source": "students003.txt",
+    "n_peds": 22,
+    "frame_start": 40,
+    "frame_end": 230
+  },
+  {
+    "scene": 3,
+    "source": "students001.txt",
+    "n_peds": 33,
+    "frame_start": 880,
+    "frame_end": 1070
+  },
+  {
+    "scene": 4,
+    "source": "students001.txt",
+    "n_peds": 45,
+    "frame_start": 320,
+    "frame_end": 510
+  },
+  {
+    "scene": 5,
+    "source": "crowds_zara02.txt",
+    "n_peds": 7,
+    "frame_start": 4650,
+    "frame_end": 4840
+  },
+  {
+    "scene": 6,
+    "source": "biwi_hotel.txt",
+    "n_peds": 6,
+    "frame_start": 13140,
+    "frame_end": 13330
+  },
+  {
+    "scene": 7,
+    "source": "students001.txt",
+    "n_peds": 34,
+    "frame_start": 920,
+    "frame_end": 1110
+  },
+  {
+    "scene": 8,
+    "source": "students001.txt",
+    "n_peds": 40,
+    "frame_start": 3560,
+    "frame_end": 3750
+  },
+  {
+    "scene": 9,
+    "source": "crowds_zara01.txt",
+    "n_peds": 2,
+    "frame_start": 2000,
+    "frame_end": 2190
+  },
+  {
+    "scene": 10,
+    "source": "crowds_zara03.txt",
+    "n_peds": 2,
+    "frame_start": 880,
+    "frame_end": 1070
+  },
+  {
+    "scene": 11,
+    "source": "students003.txt",
+    "n_peds": 20,
+    "frame_start": 3800,
+    "frame_end": 3990
+  },
+  {
+    "scene": 12,
+    "source": "students001.txt",
+    "n_peds": 37,
+    "frame_start": 1840,
+    "frame_end": 2030
+  },
+  {
+    "scene": 13,
+    "source": "students001.txt",
+    "n_peds": 31,
+    "frame_start": 1000,
+    "frame_end": 1190
+  },
+  {
+    "scene": 14,
+    "source": "students001.txt",
+    "n_peds": 24,
+    "frame_start": 1080,
+    "frame_end": 1270
+  },
+  {
+    "scene": 15,
+    "source": "students001.txt",
+    "n_peds": 21,
+    "frame_start": 4040,
+    "frame_end": 4230
+  },
+  {
+    "scene": 16,
+    "source": "crowds_zara02.txt",
+    "n_peds": 12,
+    "frame_start": 9330,
+    "frame_end": 9520
+  },
+  {
+    "scene": 17,
+    "source": "uni_examples.txt",
+    "n_peds": 2,
+    "frame_start": 5510,
+    "frame_end": 5700
+  },
+  {
+    "scene": 18,
+    "source": "students001.txt",
+    "n_peds": 33,
+    "frame_start": 3680,
+    "frame_end": 3870
+  },
+  {
+    "scene": 19,
+    "source": "students001.txt",
+    "n_peds": 32,
+    "frame_start": 1280,
+    "frame_end": 1470
+  },
+  {
+    "scene": 20,
+    "source": "students001.txt",
+    "n_peds": 57,
+    "frame_start": 0,
+    "frame_end": 190
+  },
+  {
+    "scene": 21,
+    "source": "students003.txt",
+    "n_peds": 15,
+    "frame_start": 2120,
+    "frame_end": 2310
+  },
+  {
+    "scene": 22,
+    "source": "crowds_zara01.txt",
+    "n_peds": 6,
+    "frame_start": 6540,
+    "frame_end": 6730
+  },
+  {
+    "scene": 23,
+    "source": "students003.txt",
+    "n_peds": 23,
+    "frame_start": 1960,
+    "frame_end": 2150
+  },
+  {
+    "scene": 24,
+    "source": "students001.txt",
+    "n_peds": 32,
+    "frame_start": 1520,
+    "frame_end": 1710
+  },
+  {
+    "scene": 25,
+    "source": "crowds_zara02.txt",
+    "n_peds": 7,
+    "frame_start": 8210,
+    "frame_end": 8400
+  },
+  {
+    "scene": 26,
+    "source": "students001.txt",
+    "n_peds": 25,
+    "frame_start": 640,
+    "frame_end": 830
+  },
+  {
+    "scene": 27,
+    "source": "crowds_zara02.txt",
+    "n_peds": 3,
+    "frame_start": 1970,
+    "frame_end": 2160
+  },
+  {
+    "scene": 28,
+    "source": "students001.txt",
+    "n_peds": 25,
+    "frame_start": 1120,
+    "frame_end": 1310
+  },
+  {
+    "scene": 29,
+    "source": "students001.txt",
+    "n_peds": 24,
+    "frame_start": 680,
+    "frame_end": 870
+  },
+  {
+    "scene": 30,
+    "source": "crowds_zara02.txt",
+    "n_peds": 9,
+    "frame_start": 5330,
+    "frame_end": 5520
+  },
+  {
+    "scene": 31,
+    "source": "crowds_zara02.txt",
+    "n_peds": 6,
+    "frame_start": 8170,
+    "frame_end": 8360
+  },
+  {
+    "scene": 32,
+    "source": "crowds_zara02.txt",
+    "n_peds": 5,
+    "frame_start": 10170,
+    "frame_end": 10360
+  },
+  {
+    "scene": 33,
+    "source": "students003.txt",
+    "n_peds": 23,
+    "frame_start": 2720,
+    "frame_end": 2910
+  },
+  {
+    "scene": 34,
+    "source": "students001.txt",
+    "n_peds": 18,
+    "frame_start": 4080,
+    "frame_end": 4270
+  },
+  {
+    "scene": 35,
+    "source": "crowds_zara02.txt",
+    "n_peds": 8,
+    "frame_start": 8850,
+    "frame_end": 9040
+  },
+  {
+    "scene": 36,
+    "source": "students001.txt",
+    "n_peds": 29,
+    "frame_start": 2960,
+    "frame_end": 3150
+  },
+  {
+    "scene": 37,
+    "source": "crowds_zara01.txt",
+    "n_peds": 2,
+    "frame_start": 1080,
+    "frame_end": 1270
+  },
+  {
+    "scene": 38,
+    "source": "crowds_zara03.txt",
+    "n_peds": 5,
+    "frame_start": 3320,
+    "frame_end": 3510
+  },
+  {
+    "scene": 39,
+    "source": "crowds_zara02.txt",
+    "n_peds": 9,
+    "frame_start": 6170,
+    "frame_end": 6360
+  },
+  {
+    "scene": 40,
+    "source": "crowds_zara01.txt",
+    "n_peds": 8,
+    "frame_start": 6620,
+    "frame_end": 6810
+  },
+  {
+    "scene": 41,
+    "source": "crowds_zara02.txt",
+    "n_peds": 5,
+    "frame_start": 3250,
+    "frame_end": 3440
+  },
+  {
+    "scene": 42,
+    "source": "students001.txt",
+    "n_peds": 33,
+    "frame_start": 2880,
+    "frame_end": 3070
+  },
+  {
+    "scene": 43,
+    "source": "students001.txt",
+    "n_peds": 37,
+    "frame_start": 2480,
+    "frame_end": 2670
+  },
+  {
+    "scene": 44,
+    "source": "students003.txt",
+    "n_peds": 19,
+    "frame_start": 120,
+    "frame_end": 310
+  },
+  {
+    "scene": 45,
+    "source": "crowds_zara02.txt",
+    "n_peds": 8,
+    "frame_start": 8850,
+    "frame_end": 9040
+  },
+  {
+    "scene": 46,
+    "source": "crowds_zara03.txt",
+    "n_peds": 6,
+    "frame_start": 4320,
+    "frame_end": 4510
+  },
+  {
+    "scene": 47,
+    "source": "students001.txt",
+    "n_peds": 25,
+    "frame_start": 1120,
+    "frame_end": 1310
+  },
+  {
+    "scene": 48,
+    "source": "crowds_zara03.txt",
+    "n_peds": 3,
+    "frame_start": 1240,
+    "frame_end": 1430
+  },
+  {
+    "scene": 49,
+    "source": "students003.txt",
+    "n_peds": 30,
+    "frame_start": 1800,
+    "frame_end": 1990
+  }
+]

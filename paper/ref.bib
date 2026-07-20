@@ -1,0 +1,562 @@
+% ============================================================
+% CoopCalib-TP — ref.bib
+% ECCV 2026 Submission — Session 13 Final
+%
+% NOTE: BibTeX cannot parse the symbol used for entry types
+% inside comment lines. All comments in this file use plain
+% text descriptions instead (e.g., "article" not the symbol).
+%
+% 9 REFERENCES TOTAL
+% Cited in §1 prose (8):
+%   shi2023tutr, mohamed2020social, trautman2010unfreezing,
+%   pellegrini2009eth, lerner2007ucy, karandikar2021soft,
+%   zhang2025openworld, xu2022socialvae
+% Table 1 only (1):
+%   mao2025dtgan  -- arXiv preprint, NOT in §1 prose
+%
+% KEY CORRECTIONS FROM SESSION 13
+% K1: xu2023socialvae -> xu2022socialvae (paper is ECCV 2022)
+% K2: zhang2025owobj  -> zhang2025openworld (collision risk)
+% K3: lerner2007ucy   -> entry type is "article" not "inproceedings"
+%     Computer Graphics Forum is a journal.
+% K4: mao2025dtgan    -> preprint only, note field added.
+%
+% BEFORE CAMERA-READY
+% Swap bibliographystyle plain -> splncs04 in main.tex
+% If DTGAN published at a venue: remove note field, update entry
+% ============================================================
+
+
+% -------------------------------------------------------
+% 1. TUTR — BASE MODEL
+%    Verified: CVF open access ICCV 2023
+%    Authors: 4 — Shi, Wang, Zhou, Hua
+%    Pages: 9675-9684
+% -------------------------------------------------------
+
+@InProceedings{shi2023tutr,
+  author    = {Shi, Liushuai and Wang, Le and
+               Zhou, Sanping and Hua, Gang},
+  title     = {Trajectory Unified Transformer for Pedestrian
+               Trajectory Prediction},
+  booktitle = {Proceedings of the IEEE/CVF International
+               Conference on Computer Vision (ICCV)},
+  month     = {October},
+  year      = {2023},
+  pages     = {9675--9684}
+}
+
+
+% -------------------------------------------------------
+% 2. IGP / UNFREEZING THE ROBOT — FPE ORIGIN
+%    Verified: DBLP + Semantic Scholar + ResearchGate
+%    Authors: 2 — Trautman, Krause
+%    Pages: 797-803
+%    DOI: 10.1109/IROS.2010.5654369
+%    Title braces protect "Navigation" from auto-capitalisation
+% -------------------------------------------------------
+
+@InProceedings{trautman2010unfreezing,
+  author    = {Trautman, Pete and Krause, Andreas},
+  title     = {Unfreezing the Robot: {N}avigation in Dense,
+               Interacting Crowds},
+  booktitle = {Proceedings of the IEEE/RSJ International
+               Conference on Intelligent Robots and Systems
+               (IROS)},
+  year      = {2010},
+  pages     = {797--803},
+  doi       = {10.1109/IROS.2010.5654369}
+}
+
+
+% -------------------------------------------------------
+% 3. OWOBJ — L_energy + L_KL_dyn SOURCE
+%    Verified: CVF open access CVPR 2025
+%    Authors: 7 — Zhang, Ni, Du, Xue, Torr, Koniusz,
+%             van den Hengel (all confirmed)
+%    Pages: 30332-30342
+%    Key: zhang2025openworld (renamed from zhang2025owobj
+%         to avoid collision with other Zhang 2025 CVPR papers)
+% -------------------------------------------------------
+
+@InProceedings{zhang2025openworld,
+  author    = {Zhang, Shan and Ni, Yao and Du, Jinhao and
+               Xue, Yuan and Torr, Philip and Koniusz, Piotr
+               and van den Hengel, Anton},
+  title     = {Open-World Objectness Modeling Unifies Novel
+               Object Detection},
+  booktitle = {Proceedings of the IEEE/CVF Conference on
+               Computer Vision and Pattern Recognition (CVPR)},
+  month     = {June},
+  year      = {2025},
+  pages     = {30332--30342}
+}
+
+
+% -------------------------------------------------------
+% 4. SOCIAL-STGCNN — COMPACT GCN BASELINE
+%    Verified: CVF open access + official GitHub BibTeX
+%    Authors: 4 — Mohamed, Qian, Elhoseiny, Claudel
+%    First name: Abduallah (not Abdullah)
+%    Pages: 14424-14432 (CVF open access is authoritative;
+%           Semantic Scholar gives 14412-14420 — use CVF)
+% -------------------------------------------------------
+
+@InProceedings{mohamed2020social,
+  author    = {Mohamed, Abduallah and Qian, Kun and
+               Elhoseiny, Mohamed and Claudel, Christian},
+  title     = {{S}ocial-{STGCNN}: {A} Social Spatio-Temporal
+               Graph Convolutional Neural Network for Human
+               Trajectory Prediction},
+  booktitle = {Proceedings of the IEEE/CVF Conference on
+               Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2020},
+  pages     = {14424--14432}
+}
+
+
+% -------------------------------------------------------
+% 5. SB-ECE — SOFT-BINNED CALIBRATION LOSS
+%    Verified: NeurIPS 2021 proceedings + arXiv 2108.00106
+%    Authors: 7 — do NOT truncate this list
+%    In paper: name the method "SB-ECE" in §3 and §4,
+%              not just "soft-binned loss" generically
+% -------------------------------------------------------
+
+@InProceedings{karandikar2021soft,
+  author    = {Karandikar, Archit and Cain, Nicholas and
+               Tran, Dustin and Lakshminarayanan, Balaji and
+               Shlens, Jonathon and Mozer, Michael C. and
+               Roelofs, Becca},
+  title     = {Soft Calibration Objectives for Neural Networks},
+  booktitle = {Advances in Neural Information Processing
+               Systems (NeurIPS)},
+  volume    = {34},
+  year      = {2021}
+}
+
+
+% -------------------------------------------------------
+% 6. ETH DATASET
+%    Verified: IEEE ICCV 2009 across 5 sources
+%    Authors: 4 — Pellegrini, Ess, Schindler, Van Gool
+%    WARNING: Schindler must NOT be dropped (common error)
+%    Pages: 261-268
+%    DOI: 10.1109/ICCV.2009.5459260
+% -------------------------------------------------------
+
+@InProceedings{pellegrini2009eth,
+  author    = {Pellegrini, Stefano and Ess, Andreas and
+               Schindler, Konrad and Van Gool, Luc},
+  title     = {You'll Never Walk Alone: Modeling Social
+               Behavior for Multi-Target Tracking},
+  booktitle = {Proceedings of the IEEE International
+               Conference on Computer Vision (ICCV)},
+  year      = {2009},
+  pages     = {261--268},
+  doi       = {10.1109/ICCV.2009.5459260}
+}
+
+
+% -------------------------------------------------------
+% 7. UCY DATASET
+%    Verified: Wiley Online Library (authoritative)
+%    Authors: 3 — Lerner, Chrysanthou, Lischinski
+%    ENTRY TYPE: article (journal entry, not inproceedings)
+%    Computer Graphics Forum is a journal.
+%    Using the wrong entry type causes a malformed reference
+%    in CVF proceedings PDF.
+%    Volume: 26, Number: 3, Pages: 655-664
+%    DOI: 10.1111/j.1467-8659.2007.01089.x
+% -------------------------------------------------------
+
+@article{lerner2007ucy,
+  author    = {Lerner, Alon and Chrysanthou, Yiorgos and
+               Lischinski, Dani},
+  title     = {Crowds by Example},
+  journal   = {Computer Graphics Forum},
+  volume    = {26},
+  number    = {3},
+  pages     = {655--664},
+  year      = {2007},
+  doi       = {10.1111/j.1467-8659.2007.01089.x}
+}
+
+
+% -------------------------------------------------------
+% 8. SOCIALVAE — CVAE BASELINE (RQ3)
+%    Verified: Springer ECCV 2022 proceedings
+%    Authors: 3 — Xu, Hayet, Karamouzas
+%    LNCS vol 13664, Pages: 511-528
+%    DOI: 10.1007/978-3-031-19772-7_30
+%    KEY CORRECTION: xu2022socialvae
+%    README_SESSION12 had xu2023socialvae which was wrong.
+%    Paper is ECCV 2022 (Tel Aviv). Both main.tex and ref.bib
+%    now consistently use xu2022socialvae.
+% -------------------------------------------------------
+
+@InProceedings{xu2022socialvae,
+  author    = {Xu, Pei and Hayet, Jean-Bernard and
+               Karamouzas, Ioannis},
+  title     = {{SocialVAE}: Human Trajectory Prediction
+               Using Timewise Latents},
+  booktitle = {Computer Vision -- ECCV 2022},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {13664},
+  publisher = {Springer, Cham},
+  year      = {2022},
+  pages     = {511--528},
+  doi       = {10.1007/978-3-031-19772-7_30}
+}
+
+
+% -------------------------------------------------------
+% 9. DTGAN — GAN BASELINE
+%    Source: arXiv 2501.07711 (January 2025)
+%    STATUS: Preprint only. Not peer-reviewed at any venue
+%            as of Session 13 (April 2026).
+%    USAGE:  Table 1 comparison only.
+%            Do NOT cite in §1, §2, §3, §4, §7, or §8 prose.
+%    If published at a venue before camera-ready:
+%    remove note field and update to InProceedings entry.
+%    First author Jiajia Xie; full list unconfirmed.
+% -------------------------------------------------------
+
+@article{mao2025dtgan,
+  author  = {Xie, Jiajia and others},
+  title   = {Pedestrian Trajectory Prediction Based on Social
+             Interactions Learning With Random Weights},
+  journal = {arXiv preprint},
+  volume  = {arXiv:2501.07711},
+  year    = {2025},
+  note    = {Preprint; not peer-reviewed at submission time}
+}
+
+@inproceedings{guo2017calibration,
+  author    = {Chuan Guo and Geoff Pleiss and Yu Sun and Kilian Q. Weinberger},
+  title     = {On Calibration of Modern Neural Networks},
+  booktitle = {Proceedings of the 34th International Conference on Machine Learning},
+  pages     = {1321--1330},
+  year      = {2017},
+  volume    = {70},
+  series    = {Proceedings of Machine Learning Research}
+}
+
+@inproceedings{lucas2019elbo,
+  author    = {James Lucas and George Tucker and Roger Grosse and Mohammad Norouzi},
+  title     = {Don't Blame the {ELBO}! {A} Linear {VAE} Perspective on Posterior Collapse},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {32},
+  pages     = {13624--13634},
+  year      = {2019}
+}
+
+@inproceedings{mangalam2020pecnet,
+  author    = {Karttikeya Mangalam and Harshayu Girase and Shreyas Agarwal
+               and Kuan-Hui Lee and Ehsan Adeli and Jitendra Malik
+               and Adrien Gaidon},
+  title     = {It Is Not the Journey but the Destination: Endpoint Conditioned
+               Trajectory Prediction},
+  booktitle = {European Conference on Computer Vision},
+  pages     = {759--776},
+  year      = {2020}
+}
+
+@article{xie2024dtgan,
+  author    = {Xie, Jiajia and Zhang, Sheng and Xia, Beihao and
+               Xiao, Zhu and Jiang, Hongbo and Zhou, Siwang and
+               Qin, Zheng and Chen, Hongyang},
+  title     = {Pedestrian Trajectory Prediction Based on Social
+               Interactions Learning With Random Weights},
+  journal   = {IEEE Transactions on Multimedia},
+  volume    = {26},
+  pages     = {7503--7515},
+  year      = {2024},
+  doi       = {10.1109/TMM.2024.3368931},
+  issn      = {1941-0077}
+}
+
+% -------------------------------------------------------
+% 10. GUO ET AL. — TEMPERATURE SCALING / ECE ORIGIN
+%     Verified: ICML 2017 / PMLR proceedings
+%     Authors: 4 — Guo, Pleiss, Sun, Weinberger
+%     Pages: 1321-1330, Volume 70
+%     Used in: §2.1 (calibration background)
+% -------------------------------------------------------
+
+@InProceedings{bae2024singular,
+  author    = {Bae, Inhwan and Park, Young-Jae and Jeon, Hae-Gon},
+  title     = {{SingularTrajectory}: Universal Trajectory Predictor Using Diffusion Model},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2024}
+}
+
+@InProceedings{wong2024socialcircle,
+  author    = {Wong, Conghao and Xia, Beihao and Zou, Ziqian and Wang, Yulong and You, Xinge},
+  title     = {{SocialCircle}: Learning the Angle-Based Social Interaction Representation for Pedestrian Trajectory Prediction},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2024}
+}
+
+@InProceedings{liu2024diftraj,
+  author    = {Liu, Yunlong and Shi, Changsheng and Ye, Yunji and Yin, Jianping},
+  title     = {{DifTraj}: Diffusion Inspired Joint Crowd Trajectory Predictor and Refiner},
+  booktitle = {Proceedings of the International Joint Conference on Artificial Intelligence (IJCAI)},
+  year      = {2024}
+}
+
+@inproceedings{ovadia2019can,
+  author    = {Yaniv Ovadia and Emily Anderson and Jie Ren and
+               Zachary Nado and David Sculley and Sebastian Nowozin and
+               Joshua V. Dillon and Balaji Lakshminarayanan and
+               Jasper Snoek},
+  title     = {Can You Trust Your Model's Uncertainty? {E}valuating
+               Predictive Uncertainty Under Dataset Shift},
+  booktitle = {Advances in Neural Information Processing Systems
+               (NeurIPS)},
+  volume    = {32},
+  pages     = {13969--13980},
+  year      = {2019}
+}
+
+@article{helbing1995social,
+  author    = {Dirk Helbing and P\'{e}ter Moln\'{a}r},
+  title     = {Social Force Model for Pedestrian Dynamics},
+  journal   = {Physical Review E},
+  volume    = {51},
+  number    = {5},
+  pages     = {4282--4286},
+  year      = {1995}
+}
+
+@inproceedings{alahi2016social,
+  author    = {Alexandre Alahi and Kratarth Goel and Vignesh Ramanathan
+               and Alexandre Robicquet and Li Fei-Fei and Silvio Savarese},
+  title     = {{Social LSTM}: Human Trajectory Prediction in Crowded Spaces},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision
+               and Pattern Recognition (CVPR)},
+  pages     = {961--971},
+  year      = {2016}
+}
+
+@inproceedings{gupta2018social,
+  author    = {Agrim Gupta and Justin Johnson and Li Fei-Fei and
+               Silvio Savarese and Alexandre Alahi},
+  title     = {{Social GAN}: Socially Acceptable Trajectories with
+               Generative Adversarial Networks},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision
+               and Pattern Recognition (CVPR)},
+  pages     = {2255--2264},
+  year      = {2018}
+}
+
+@inproceedings{salzmann2020trajectron,
+  author    = {Tim Salzmann and Boris Ivanovic and Punarjay Chakravarty
+               and Marco Pavone},
+  title     = {{Trajectron++}: Dynamically-Feasible Probabilistic
+               Human Trajectory Forecasting with Heterogeneous Data},
+  booktitle = {Computer Vision -- ECCV 2020},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {12363},
+  pages     = {683--700},
+  publisher = {Springer, Cham},
+  year      = {2020}
+}
+
+@inproceedings{ivanovic2019trajectron,
+  author    = {Boris Ivanovic and Marco Pavone},
+  title     = {The {Trajectron}: Probabilistic Multi-Agent Trajectory
+               Modeling with Dynamic Spatiotemporal Graphs},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on
+               Computer Vision (ICCV)},
+  pages     = {2375--2384},
+  year      = {2019}
+}
+
+@inproceedings{lakshminarayanan2017simple,
+  author    = {Balaji Lakshminarayanan and Alexander Pritzel and Charles Blundell},
+  title     = {Simple and Scalable Predictive Uncertainty Estimation
+               using Deep Ensembles},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {30},
+  pages     = {6402--6413},
+  year      = {2017}
+}
+
+@inproceedings{niculescu2005predicting,
+  author    = {Alexandru Niculescu-Mizil and Rich Caruana},
+  title     = {Predicting Good Probabilities With Supervised Learning},
+  booktitle = {Proceedings of the 22nd International Conference on
+               Machine Learning (ICML)},
+  pages     = {625--632},
+  year      = {2005}
+}
+
+@inproceedings{robicquet2016learning,
+  author    = {Alexandre Robicquet and Amir Sadeghian and Alexandre Alahi
+               and Silvio Savarese},
+  title     = {Learning Social Etiquette: Human Trajectory Understanding
+               in Crowded Scenes},
+  booktitle = {Computer Vision -- ECCV 2016},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {9912},
+  pages     = {549--565},
+  publisher = {Springer, Cham},
+  year      = {2016}
+}
+
+@inproceedings{rhinehart2019precog,
+  author    = {Nicholas Rhinehart and Rowan McAllister and Kris Kitani
+               and Sergey Levine},
+  title     = {{PRECOG}: Prediction Conditioned on Goals in Visual
+               Multi-Agent Settings},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on
+               Computer Vision (ICCV)},
+  pages     = {2821--2830},
+  year      = {2019}
+}
+
+@inproceedings{yuan2021agentformer,
+  author    = {Ye Yuan and Xinshuo Weng and Yanglan Ou and Kris Kitani},
+  title     = {{AgentFormer}: Agent-Aware Transformers for Socio-Temporal
+               Multi-Agent Forecasting},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on
+               Computer Vision (ICCV)},
+  pages     = {9813--9823},
+  year      = {2021}
+}
+
+@inproceedings{gu2022stochastic,
+  author    = {Jiangtao Gu and Chen Sun and Yuexin Ma},
+  title     = {Stochastic Trajectory Prediction via Motion Indeterminacy
+               Diffusion},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision
+               and Pattern Recognition (CVPR)},
+  pages     = {17113--17122},
+  year      = {2022}
+}
+
+@inproceedings{zhou2022grouptron,
+  author    = {Wenwen Zhou and Longchao Da and Ruimin Shen},
+  title     = {{GroupTron}: A Self-Attention Group-Based Pedestrian
+               Trajectory Prediction with Multi-Scale Features},
+  booktitle = {IEEE International Conference on Robotics and Automation
+               (ICRA)},
+  pages     = {5225--5231},
+  year      = {2022}
+}
+
+@article{rudenko2020human,
+  author    = {Andrey Rudenko and Luigi Palmieri and Michael Herman
+               and Kris M. Kitani and Dariu M. Gavrila
+               and Kai O. Arras},
+  title     = {Human Motion Trajectory Prediction: A Survey},
+  journal   = {The International Journal of Robotics Research},
+  volume    = {39},
+  number    = {8},
+  pages     = {895--935},
+  year      = {2020}
+}
+
+@inproceedings{becker2018evaluation,
+  author    = {Stefan Becker and Ronny Hug and Wolfgang Huebner
+               and Michael Arens},
+  title     = {An Evaluation of Trajectory Prediction Approaches and
+               Notes on the Trajectory Challenge},
+  booktitle = {European Conference on Computer Vision (ECCV) Workshops},
+  year      = {2018}
+}
+
+@inproceedings{zhang2022d2stgnn,
+  author    = {Shuo Zhang and Yuebing Liang and Hao Li and Quan Yuan
+               and Luolin Xiong},
+  title     = {Practical Pedestrian Trajectory Prediction with Semantic
+               Guidance},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on
+               Applications of Computer Vision (WACV)},
+  pages     = {2342--2351},
+  year      = {2022}
+}
+
+@inproceedings{phan2020covernet,
+  author    = {Tung Phan-Minh and Elena Corina Grigore and Freddy A. Boulton
+               and Oscar Beijbom and Eric M. Wolff},
+  title     = {{CoverNet}: Multimodal Behavior Prediction Using Trajectory Sets},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision
+               and Pattern Recognition (CVPR)},
+  pages     = {14074--14083},
+  year      = {2020}
+}
+
+@inproceedings{shi2022motion,
+  author    = {Shaoshuai Shi and Li Jiang and Dengxin Dai
+               and Bernt Schiele},
+  title     = {Motion Transformer with Global Intention Localization
+               and Local Movement Refinement},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {35},
+  pages     = {6531--6543},
+  year      = {2022}
+}
+
+@InProceedings{minderer2021revisiting,
+  author    = {Minderer, Matthias and Djolonga, Josip and Romijnders, Rob and Hubis, Frances and Zhai, Xiaohua and Houlsby, Neil and Tran, Dustin and Lucic, Mario},
+  title     = {Revisiting the Calibration of Modern Neural Networks},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {34},
+  year      = {2021}
+}
+
+@InProceedings{nixon2019measuring,
+  author    = {Nixon, Jeremy and Dusenberry, Michael W. and Zhang, Linchuan and Jerfel, Ghassen and Tran, Dustin},
+  title     = {Measuring Calibration in Deep Learning},
+  booktitle = {CVPR Workshops},
+  year      = {2019}
+}
+
+@InProceedings{kothari2021interpretable,
+  author    = {Kothari, Parth and Sifringer, Brian and Alahi, Alexandre},
+  title     = {Interpretable Social Anchors for Human Trajectory Forecasting in Crowds},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2021},
+  pages     = {15386--15396}
+}
+
+@InProceedings{shi2021sgcn,
+  author    = {Shi, Liushuai and Wang, Le and Long, Chengjiang and Zhou, Sanping and Zhou, Mo and Niu, Zhenxing and Hua, Gang},
+  title     = {SGCN: Sparse Graph Convolution Network for Pedestrian Trajectory Prediction},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2021},
+  pages     = {8994--9003}
+}
+
+@InProceedings{ziebart2009planning,
+  author    = {Ziebart, Brian D. and Ratliff, Nathan and Gallagher, Garrett and Mertz, Christoph and Peterson, Kevin and Bagnell, J. Andrew and Hebert, Martial and Dey, Anind K. and Srinivasa, Siddhartha},
+  title     = {Planning-Based Prediction for Pedestrians},
+  booktitle = {Proceedings of the International Joint Conference on Artificial Intelligence (IJCAI)},
+  year      = {2009},
+  pages     = {3931--3936}
+}
+
+@InProceedings{sun2022complementing,
+  author    = {Sun, Liting and Zhan, Wei and Tomizuka, Masayoshi and Dragan, Anca},
+  title     = {On Complementing End-to-End Human Behavior Predictors with Planning},
+  booktitle = {Robotics: Science and Systems (RSS)},
+  year      = {2022}
+}
+
+@InProceedings{shi2023mtr,
+  author    = {Shi, Shaoshuai and Jiang, Li and Dai, Dengxin and Schiele, Bernt},
+  title     = {Motion Transformer with Global Intention Localization and Local Movement Refinement},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {36},
+  year      = {2023}
+}
+
+@InProceedings{gu2023motiondiffuser,
+  author    = {Gu, Jinghao and Hu, Chen and Zhang, Tianfan and Chen, Xuanyao and Wang, Yilun and Wang, Zhongyi and Ivanovic, Boris and Pavone, Marco},
+  title     = {MotionDiffuser: Controllable Multi-Agent Motion Prediction Using Diffusion},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2023},
+  pages     = {9644--9653}
+}

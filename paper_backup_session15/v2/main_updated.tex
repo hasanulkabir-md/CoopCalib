@@ -1,0 +1,740 @@
+% ============================================================
+% CoopCalib-TP — main.tex
+% Target venue : IEEE RAL (rolling deadline)
+% Template     : article class for draft; switch to IEEEtran
+%                at final submission.
+%
+% HOW TO COMPILE (Windows PowerShell, venv active)
+%   pdflatex main.tex
+%   bibtex   main
+%   pdflatex main.tex
+%   pdflatex main.tex
+%
+% BIBLIOGRAPHY FILE: ref.bib  (same directory as this file)
+%
+% SESSION 16 UPDATES
+% ------------------
+% [U1] Title changed — "Audit" framing
+% [U2] §1 contributions rewritten — 4 corrected contributions
+%      Cohen's d 2.327 removed. Boundary-probing narrative removed.
+%      3-seed stats added. V2R finding added.
+% [U3] §3 SPSR definition updated — ego/padding exclusion footnote
+% [U4] §4 combined objective updated — V2R variant added
+% [U5] §6 Results fully rewritten — all values corrected
+%      Table 2 corrected. §6.4 SVR rewritten. §6.5 SPSR new section.
+% [U6] §7 Discussion rewritten — boundary-probing removed.
+%      Safety-accuracy trade-off added. V2R interpretation added.
+% [U7] §8 Conclusion rewritten — matches corrected findings
+%
+% CITE KEY MASTER LIST
+% --------------------
+%  shi2023tutr          TUTR, ICCV 2023
+%  mohamed2020social    Social-STGCNN, CVPR 2020
+%  trautman2010unfreezing  IGP/FPE, IROS 2010
+%  pellegrini2009eth    ETH dataset, ICCV 2009
+%  lerner2007ucy        UCY dataset, CGF journal 2007
+%  karandikar2021soft   SB-ECE, NeurIPS 2021
+%  zhang2025openworld   OWOBJ, CVPR 2025
+%  xu2022socialvae      SocialVAE, ECCV 2022
+%  xie2024dtgan         DTGAN, arXiv 2025
+%  bae2024singular      SingularTrajectory, CVPR 2024
+%  wong2024socialcircle SocialCircle, CVPR 2024
+%  liu2024diftraj       DifTraj, IJCAI 2024
+%  guo2017calibration   Temperature scaling, ICML 2017
+%  lucas2019elbo        KL collapse, NeurIPS 2019
+%  alahi2016social      Social LSTM, CVPR 2016
+%  gupta2018social      Social GAN, CVPR 2018
+%  salzmann2020trajectron Trajectron++, ECCV 2020
+%  lakshminarayanan2017simple Deep Ensembles, NeurIPS 2017
+%  niculescu2005predicting  Reliability diagrams, ICML 2005
+%  ovadia2019can        Uncertainty under shift, NeurIPS 2019
+%  helbing1995social    Social Force, Phys Rev E 1995
+%  ivanovic2019trajectron  The Trajectron, ICCV 2019
+%  robicquet2016learning   SDD dataset, ECCV 2016
+%  mangalam2020pecnet   PECNet, ECCV 2020
+% ============================================================
+
+\documentclass{article}
+
+% ---- packages -----------------------------------------------
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\newcommand{\etal}{et~al.\@}
+% -------------------------------------------------------------
+
+\title{Calibration and Safety Audit of Transformer-Based\\
+       Trajectory Prediction for Dense-Crowd Navigation}
+\author{Anonymous Submission}
+\date{}
+
+\begin{document}
+\maketitle
+
+% ============================================================
+% §1 INTRODUCTION
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+Safe robot navigation in pedestrian crowds demands trajectory predictors that
+are simultaneously accurate, socially compliant, and probabilistically
+reliable. Transformer-based methods have substantially reduced displacement
+error on standard benchmarks~\cite{shi2023tutr,mohamed2020social}, yet the
+safety-relevant properties of their probability outputs have received almost
+no empirical scrutiny. Do predicted probability scores faithfully reflect
+uncertainty? Do all predicted candidates cluster into collision-prone
+configurations in dense scenes --- the Freezing Predictor Effect (FPE)
+identified in Gaussian-process planners~\cite{trautman2010unfreezing}? Does
+social compliance of the top-ranked prediction degrade as crowd density
+increases, and can training-time losses improve it? These questions bear
+directly on whether trajectory prediction can serve as a reliable signal for
+downstream planning in safety-critical settings, yet none has been answered
+at pedestrian-dataset scale with multi-seed statistical rigour.
+
+We conduct the first systematic calibration and safety audit of a
+state-of-the-art transformer trajectory predictor across all five
+ETH-UCY subsets~\cite{pellegrini2009eth,lerner2007ucy}, using three
+independent training seeds for the baseline and the key experimental
+variant. Our findings challenge assumptions the field has held without
+testing, and reveal a previously uncharacterised safety--accuracy trade-off
+in social loss design.
+
+The FPE was originally characterised by Trautman and
+Krause~\cite{trautman2010unfreezing} for planners that ignore joint
+pedestrian distributions. The assumption that modern attention-based
+predictors inherit this failure mode has informed several architectural
+choices, yet the effect has never been directly measured in transformer
+predictors on ETH-UCY. We introduce the \textbf{Freezing Predictor Rate}
+(FPR) and find it is identically \textbf{0.000} across all five folds, all
+three density tiers, and all model variants: transformer self-attention
+implicitly distributes predictions across the feasible interaction space,
+resolving the freezing failure mode without any explicit cooperative
+objective.
+
+Despite this implicit structural safety, the calibration of predicted
+probabilities remains entirely unmeasured in trajectory prediction. We
+establish the \textbf{first ECE baseline} across all five ETH-UCY subsets,
+finding ECE\,\(=\,0.554\,\pm\,0.000\) (3-seed mean\,\(\pm\)\,std over the
+full model), and show that auxiliary calibration losses cannot reduce ECE in
+winner-takes-all predictors without architectural change.
+
+Our fourth and most surprising finding concerns the interaction between
+social training losses and planning safety. A ranking-aware social loss
+(V2R) simultaneously \emph{reduces} the Social Violation Rate by 1.0
+percentage points and \emph{improves} Safe Planning Success Rate by 2.6
+percentage points (both statistically significant at $3\sigma$, 3-seed
+confirmed), but does so at a cost of 19.5\% ADE degradation. This
+safety--accuracy trade-off is invisible to standard ADE/FDE metrics and
+is quantified here for the first time.
+
+\noindent\textbf{Contributions.}
+
+\begin{itemize}
+
+    \item \textbf{First ECE baseline in trajectory prediction (3-seed
+    confirmed).} We report ECE\,\(=\,0.554\,\pm\,0.000\) for vanilla TUTR
+    across all five ETH-UCY subsets and show that the soft-binned
+    calibration loss \(\mathcal{L}_{\text{ECE}}\)~\cite{karandikar2021soft}
+    cannot reduce ECE in winner-takes-all predictors, identifying
+    architectural change at the selection stage as the necessary next step.
+
+    \item \textbf{Systematic empirical disproof of FPE in transformer
+    predictors.} FPR\,\(=\,0.000\) across all density tiers and all variants
+    demonstrates that transformer self-attention architecturally resolves the
+    freezing failure mode~\cite{trautman2010unfreezing} without explicit
+    cooperative regularisation.
+
+    \item \textbf{Quantified safety--accuracy trade-off from ranking-aware
+    social loss (3-seed confirmed).} Our ranking-aware variant V2R reduces
+    SVR by \(-0.010\) and improves SPSR by \(+0.026\) simultaneously
+    (both $3\sigma$-significant), but increases ADE by \(+0.043\,\)m
+    --- a trade-off the SPSR and SVR metrics surface and ADE/FDE
+    cannot.
+
+    \item \textbf{Validated null result for KL collapse at ETH-UCY scale.}
+    KL divergence remains stable at \(0.023\)--\(0.026\) across
+    \(N_{\text{train}}\,=\,500\)--\(1845\), demonstrating that dynamic KL
+    priors~\cite{zhang2025openworld} are unnecessary at this scale.
+
+\end{itemize}
+
+The remainder of the paper is organised as follows. Section~\ref{sec:related}
+surveys calibration, social compliance, and data-efficient trajectory
+prediction. Section~\ref{sec:prelim} formalises the TUTR architecture,
+dataset density stratification, and the four evaluation metrics.
+Section~\ref{sec:method} derives the auxiliary losses and their integration.
+Section~\ref{sec:experiments} describes the experimental protocol.
+Section~\ref{sec:results} reports all quantitative findings.
+Section~\ref{sec:discussion} interprets the safety--accuracy trade-off and
+structural findings. Section~\ref{sec:conclusion} states implications for
+dense-crowd robot navigation.
+
+% ============================================================
+% §2 RELATED WORK
+% ============================================================
+
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Calibration in Predictive Models}
+
+A probabilistic predictor is calibrated when its confidence scores reflect
+true empirical frequencies: among all predictions assigned confidence \(p\),
+a fraction \(p\) should prove correct~\cite{guo2017calibration,niculescu2005predicting}.
+Guo et al.~\cite{guo2017calibration} demonstrated that modern deep classifiers
+are systematically overconfident and introduced temperature scaling --- a
+single post-hoc parameter that rescales logits to reduce Expected Calibration
+Error (ECE). Ovadia et al.~\cite{ovadia2019can} showed that calibration
+degrades further under distributional shift, motivating training-time
+calibration objectives beyond post-hoc correction.
+
+Trajectory prediction, by contrast, produces continuous multimodal
+distributions over future paths, for which no analogue of temperature scaling
+has been established. Karandikar et al.~\cite{karandikar2021soft} introduced
+a differentiable surrogate for ECE that enables calibration to be optimised as
+a training objective. By replacing hard bin assignments with soft Gaussian
+weights, their formulation provides smooth gradients with respect to predicted
+confidence scores. We apply this formulation directly as
+\(\mathcal{L}_{\text{ECE}}\) in \S\ref{sec:method}, applied to TUTR's
+CLF-FC head. The closest precedent within trajectory prediction is the
+Brier-ADE criterion implicitly present in TUTR~\cite{shi2023tutr}, which
+encourages relative ranking of samples but does not constrain absolute
+confidence values to match empirical coverage. No prior work has reported
+or optimised ECE for trajectory prediction.
+
+\subsection{Social Interaction and Freezing Predictor Effect}
+
+Early social models encoded interactions through hand-crafted potential
+fields~\cite{helbing1995social}. Social-LSTM~\cite{alahi2016social} and
+Social-GAN~\cite{gupta2018social} introduced learned social pooling layers,
+allowing interaction representations to emerge from data. Trautman and
+Krause~\cite{trautman2010unfreezing} identified the Freezing Predictor Effect
+in Gaussian process planners and proposed Interacting Gaussian Processes (IGP)
+to address it. Social-STGCNN~\cite{mohamed2020social} encoded interactions as
+a spatial graph with convolutional message passing. TUTR~\cite{shi2023tutr}
+replaced graph convolution with full pairwise self-attention, learning
+interaction weights without hand-crafted adjacency.
+
+More recent work has explored diffusion-based~\cite{liu2024diftraj} and
+geometric~\cite{wong2024socialcircle} interaction representations, as well as
+dataset-agnostic generative priors~\cite{bae2024singular}. Despite these
+architectural advances, none of these works report calibration quality or
+safety-oriented metrics such as FPR, SVR, or SPSR, leaving open whether
+architectural diversity translates to reliable probability estimates in dense
+scenes. We provide the first controlled FPR measurement across density tiers
+and show it is identically zero for TUTR, an architectural rather than
+regularisation-driven result.
+
+\subsection{KL Collapse in Conditional VAEs}
+
+During CVAE training, the KL term in the ELBO can collapse to near-zero,
+causing the encoder posterior to match the prior trivially~\cite{lucas2019elbo}.
+Zhang et al.~\cite{zhang2025openworld} addressed this in object detection with
+a dynamic KL prior that adapts the target distribution to observed scene
+complexity. Trajectron++~\cite{salzmann2020trajectron} and
+Trajectron~\cite{ivanovic2019trajectron} adopted structured latent spaces to
+resist collapse in trajectory VAEs. We apply the dynamic prior from
+\citet{zhang2025openworld} to SocialVAE~\cite{xu2022socialvae} and find that
+KL collapse does not occur at ETH-UCY scale regardless of whether the dynamic
+prior is used.
+
+% ============================================================
+% §3 PRELIMINARIES
+% ============================================================
+
+\section{Preliminaries}
+\label{sec:prelim}
+
+\subsection{TUTR Architecture}
+\label{sec:prelim:tutr}
+
+TUTR~\cite{shi2023tutr} frames pedestrian trajectory prediction as a
+sequence-to-sequence problem solved by a social transformer. Given the
+observed positions of \(N\) agents over \(T_\text{obs} = 8\) timesteps, the
+encoder projects each agent into a token embedding and applies multi-head
+self-attention across all \(N\) tokens, aggregating social context without
+explicit interaction rules. The decoder produces \(K=20\) trajectory candidates
+per agent over \(T_\text{pred} = 12\) timesteps. A classification head
+(CLF-FC) assigns a scalar probability score \(\hat{p}_k \in [0,1]\) to each
+candidate, with \(\sum_{k=1}^{K} \hat{p}_k = 1\). The final prediction is the
+candidate with the highest score; all calibration losses and ECE evaluation
+are applied to \(\{\hat{p}_k\}_{k=1}^{K}\).
+
+\subsection{Dataset and Density Stratification}
+\label{sec:prelim:dataset}
+
+We evaluate on the five ETH-UCY subsets~\cite{pellegrini2009eth,lerner2007ucy}.
+We follow the per-subset protocol, training and evaluating independently on
+each subset using predefined splits. Mean Nearest-Neighbour Distance (MND) is
+computed from raw \texttt{.txt} trajectory files to avoid the selection bias
+of pre-processed pkl files, yielding three empirical density tiers: ETH forms
+the \textbf{sparse} tier (MND\,\(=\,2.284\)\,m); HOTEL, ZARA1, ZARA2 form the
+\textbf{medium} tier (MND\,\(=\,1.52\)--\(1.93\)\,m); UNIV alone forms the
+\textbf{dense} tier (MND\,\(=\,0.921\)\,m).
+
+\subsection{Safety and Calibration Metrics}
+\label{sec:prelim:metrics}
+
+\paragraph{Expected Calibration Error (ECE).}
+We use the soft-binned ECE formulation~\cite{karandikar2021soft} with
+\(M=15\) equal-width bins over \(\{\hat{p}_k\}_{k=1}^{K}\). ECE measures
+the gap between stated confidence and empirical accuracy; ECE\(=0\) indicates
+perfect calibration.
+
+\paragraph{Freezing Predictor Rate (FPR).}
+FPR measures the fraction of test scenes in which \emph{all} \(K=20\)
+predicted trajectories are mutually collision-prone with at least one
+neighbour at threshold \(d_\text{min}=0.5\)\,m. FPR\(=0\) means the
+predictor always offers at least one non-freezing candidate.
+
+\paragraph{Social Violation Rate (SVR).}
+SVR measures the fraction of test scenes in which the \emph{top-ranked}
+prediction violates personal space, i.e., comes within \(d_\text{min}\) of
+any neighbour at any predicted timestep.
+
+\paragraph{Safe Planning Success Rate (SPSR).}
+SPSR evaluates a virtual downstream planner that selects trajectories using
+\(\{\hat{p}_k\}_{k=1}^{K}\) as a filter. For a scene to succeed, at least
+one of the $K$ candidates must (a) reach within \(r_\text{goal}=1.0\)\,m of
+the ground-truth final position and (b) avoid coming within
+\(r_\text{plan}=0.5\)\,m of any \emph{real} neighbour trajectory at any
+predicted timestep.\footnote{Real neighbour trajectories are identified by
+excluding: (i) the ego agent's own trajectory (slot 0 in the TUTR neis
+tensor, whose future matches the ground truth exactly); (ii) zero-occupancy
+padding slots (all-zero future trajectories used when fewer than MaxN
+neighbours are present). Only non-sentinel, non-ego, non-zero slots are
+checked for collision.} SPSR\(\in[0,1]\); higher is better.
+
+% ============================================================
+% §4 METHODOLOGY
+% ============================================================
+
+\section{Methodology}
+\label{sec:method}
+
+\subsection{Base Model: TUTR}
+\label{sec:method:tutr}
+
+We build on TUTR~\cite{shi2023tutr}, introducing auxiliary training-time
+losses that modify only the training objective --- the inference graph is
+unchanged, incurring \textbf{zero additional inference overhead}. The
+combined objective is:
+%
+\begin{equation}
+  \mathcal{L} = \mathcal{L}_{\text{base}} +
+                \lambda_1 \mathcal{L}_{\text{ECE}} +
+                \lambda_2 \mathcal{L}_{\text{energy}} +
+                \lambda_3 \mathcal{L}_{\text{KL\_dyn}}
+  \label{eq:combined}
+\end{equation}
+%
+where \(\mathcal{L}_{\text{base}}\) is the original TUTR loss (winner-takes-all
+minFDE with diversity regularisation).
+
+\subsection{Density Stratification}
+\label{sec:method:density}
+
+\begin{table}[h]
+\centering
+\small
+\caption{Data-driven density stratification of ETH-UCY subsets.}
+\label{tab:density}
+\begin{tabular}{l c c}
+\toprule
+Tier & Subsets & Mean MND \\
+\midrule
+Sparse (\(>\)2.0\,m) & ETH & 2.284\,m \\
+Medium (1.0--2.0\,m) & HOTEL, ZARA1, ZARA2 & 1.52--1.93\,m \\
+Dense (\(<\)1.0\,m) & UNIV & 0.921\,m \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Calibration Loss \(\mathcal{L}_{\text{ECE}}\)}
+\label{sec:method:ece}
+
+We apply the soft-binned ECE loss of Karandikar~\etal~\cite{karandikar2021soft}
+to TUTR's CLF-FC head, with \(M=15\) bins and accuracy threshold
+\(s=1.5\)\,m:
+%
+\begin{equation}
+  \mathcal{L}_{\text{ECE}} = \sum_{m=1}^{M} w_m \,
+  \bigl| \overline{\text{acc}}_m - \overline{\text{conf}}_m \bigr|
+  \label{eq:lece}
+\end{equation}
+
+We find empirically that \(\mathcal{L}_{\text{ECE}}\) does not reduce ECE
+when applied to a winner-takes-all predictor. At each training step, gradient
+signal for trajectory regression flows only through the minimum-displacement
+candidate; the remaining \(K-1\) candidates receive no trajectory gradient.
+The calibration loss can act on confidence scores but cannot redistribute
+trajectory diversity across all \(K\) candidates, which calibration ultimately
+requires. This is a structural limitation of minADE/minFDE training
+(\S\ref{sec:discussion}).
+
+\subsection{Social Energy Loss \(\mathcal{L}_{\text{energy}}\)}
+\label{sec:method:energy}
+
+For each predicted trajectory \(\hat{\mathbf{y}}^{(k)}\) and observed
+neighbour trajectory \(\mathbf{x}_j\), the loss penalises pairwise distances
+below safety radius \(r=0.3\)\,m:
+%
+\begin{equation}
+  \mathcal{L}_{\text{energy}} = \frac{1}{KN_j T}
+  \sum_{k,j,t} \max\!\Bigl(0,\;
+  r - \bigl\|\hat{\mathbf{y}}^{(k)}_t - \mathbf{x}_{j,t}\bigr\|_2\Bigr)^2
+  \label{eq:lenergy}
+\end{equation}
+
+This penalises all \(K\) candidates equally. Because FPR\(=0.000\) for TUTR
+(RQ2, \S\ref{sec:results:rq2}), \(\mathcal{L}_{\text{energy}}\) is not needed
+as a freeze mitigation; its role is instead to provide a broad social margin
+signal across the full candidate set.
+
+\subsection{Ranking-Aware Social Loss \(\mathcal{L}_{\text{ranking}}\)}
+\label{sec:method:ranking}
+
+To address the limitation that \(\mathcal{L}_{\text{energy}}\) penalises all
+$K$ candidates equally regardless of their ranking, we introduce a
+ranking-aware variant that targets the CLF-FC selection mechanism directly.
+For each candidate \(k\), let \(d_k = \min_{j,t}\|\hat{\mathbf{y}}^{(k)}_t -
+\mathbf{x}_{j,t}\|_2\) be the minimum distance to any neighbour at any
+timestep, and let \(v_k = \max(0, r - d_k)^2\) be the per-candidate violation.
+The ranking-aware loss weights violations by per-candidate confidence:
+%
+\begin{equation}
+  \mathcal{L}_{\text{ranking}} = \sum_{k=1}^{K} w_k \, v_k
+  \label{eq:lranking}
+\end{equation}
+%
+where \(w_k = 1/K\) (uniform) when \(\text{scores} \in \mathbb{R}^{B \times
+M}\) with \(M \neq K\) --- as is the case for TUTR's 50-class motion-mode
+CLF head --- and \(w_k = \text{softmax}(\text{scores})_k\) otherwise.
+Gradient flows through the violation term into predicted trajectories,
+encouraging compliant candidates to be generated without requiring the CLF
+head's 50-dimensional output to be projected to $K$ dimensions.
+
+\subsection{Dynamic KL Prior \(\mathcal{L}_{\text{KL\_dyn}}\)}
+\label{sec:method:kl}
+
+For SocialVAE~\cite{xu2022socialvae}, we replace the fixed unit Gaussian prior
+with a scene-conditioned dynamic prior
+\(p_\theta(z) = \mathcal{N}(\mathbf{0},\, (\sigma^2 + \beta^2)\mathbf{I})\),
+where \(\beta\) is a learnable offset:
+%
+\begin{equation}
+  \mathcal{L}_{\text{KL\_dyn}} = D_{\text{KL}}\!\bigl(
+    q(z|\mathbf{x}) \;\|\; p_\theta(z)\bigr)
+  \label{eq:lkl}
+\end{equation}
+
+\subsection{Ablation Variants}
+\label{sec:method:combined}
+
+We evaluate six variants of Eq.~\eqref{eq:combined}: \textbf{V0} (vanilla
+TUTR, \(\lambda_1\!=\!\lambda_2\!=\!0\)); \textbf{V1} (\(\lambda_1\!=\!0.1\),
+calibration only); \textbf{V2} (\(\lambda_2\!=\!0.1\), energy only);
+\textbf{V3} (\(\lambda_2\!=\!0.1\), energy only, same as V2 without
+calibration); \textbf{V1W} (\(\lambda_1\!=\!0.3\), 50-epoch warm-up before
+ECE activation); \textbf{V2R} (\(\lambda_2\!=\!0.1\),
+\(\lambda_3\!=\!0.5\) for \(\mathcal{L}_{\text{ranking}}\), ranking-aware
+social loss). V0 and V2R are evaluated with three random seeds (42, 1, 123);
+V1, V2, V3, V1W with seed 42 only.
+
+% ============================================================
+% §5 EXPERIMENTS
+% ============================================================
+
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Datasets}
+\label{sec:exp:datasets}
+
+\paragraph{ETH-UCY.}
+We use the standard five-subset ETH-UCY
+benchmark~\cite{pellegrini2009eth,lerner2007ucy} following the per-subset
+protocol with predefined train/test splits. Trajectories are sampled at
+2.5\,fps, with \(T_{\text{obs}}=8\) and \(T_{\text{pred}}=12\) frames.
+Density stratification follows \S\ref{sec:method:density}.
+
+\paragraph{Stanford Drone Dataset (SDD).}
+For out-of-distribution evaluation, we preprocess SDD following the PECNet
+split~\cite{mangalam2020pecnet}: 55 training files and 5 held-out test files.
+
+\paragraph{TrajNet++ interaction-rich scenes.}
+We sample 50 interaction-rich scenes from our ETH-UCY test splits (fixed
+\texttt{seed=42}, minimum five co-present pedestrians, mean 19 pedestrians per
+scene) for a held-out evaluation under high social complexity.
+
+\subsection{Baselines}
+\label{sec:exp:baselines}
+
+We compare against Social-STGCNN~\cite{mohamed2020social} and
+DTGAN~\cite{xie2024dtgan}. Neither baseline reports ECE, FPR, SVR, or SPSR;
+we compute these metrics on their publicly released prediction files.
+
+\subsection{Metrics}
+\label{sec:exp:metrics}
+
+We report minADE\(_K\) and minFDE\(_K\) (standard accuracy metrics), ECE
+(calibration), FPR (freeze detection), SVR (social compliance), and SPSR
+(planning utility). All four novel metrics are computed post-hoc from saved
+prediction arrays with no GPU time required.
+
+\subsection{Implementation Details}
+\label{sec:exp:impl}
+
+All TUTR variants are trained from scratch using original
+hyperparameters~\cite{shi2023tutr}: Adam, lr\(=10^{-4}\), 200 epochs, batch
+size 32. All experiments run on a single NVIDIA RTX 3050 Ti Laptop GPU
+(4\,GB VRAM), Windows 11, CUDA 12.1, PyTorch 2.5.1.
+
+\input{table1_ablation}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{fig4_accuracy_preservation}
+  \caption{Auxiliary losses preserve trajectory accuracy across all five
+           ETH-UCY folds. Relative change in ADE (left) and FDE (right)
+           for V1 and V2 versus V0 baseline. Most values lie within
+           $\pm 3\%$. V2R (ranking-aware) shows larger ADE degradation
+           (+13.2\% to +22.7\%), reflecting the safety--accuracy trade-off
+           discussed in \S\ref{sec:results:rq5}.}
+  \label{fig:accuracy}
+\end{figure}
+
+% ============================================================
+% §6 RESULTS
+% ============================================================
+
+\section{Results}
+\label{sec:results}
+
+\subsection{RQ1: Calibration --- First ECE Measurement}
+\label{sec:results:rq1}
+
+Vanilla TUTR (V0) achieves a 3-seed mean ECE of \(0.554\,\pm\,0.000\) across
+all five ETH-UCY folds, with worst miscalibration in the sparse ETH subset
+(ECE\,\(=\,0.627\,\pm\,0.002\)) and best calibration in ZARA1
+(ECE\,\(=\,0.515\,\pm\,0.001\)). Adding \(\mathcal{L}_{\text{ECE}}\) (V1)
+produces no meaningful improvement: mean ECE changes by at most \(+0.005\)
+across folds, and V1W (with a 50-epoch warm-up and stronger
+\(\lambda_1=0.3\)) yields ECE\,\(=\,0.559\), also above baseline.
+
+These results constitute the \emph{first systematic ECE measurement in
+trajectory prediction} and establish a community baseline. The absence of
+improvement under calibration training is attributable to TUTR's
+winner-takes-all objective (\S\ref{sec:discussion}); the measurement itself
+is the contribution. Accuracy is minimally affected: ADE changes by at most
+\(\pm 0.003\)\,m for V0--V1W variants (Figure~\ref{fig:accuracy}).
+
+\subsection{RQ2: Freezing Predictor Effect --- Architectural Immunity}
+\label{sec:results:rq2}
+
+FPR is identically \textbf{0.000} across all six variants, all five folds,
+and both threshold values (\(d_\text{min}=0.5\)\,m and \(0.8\)\,m). This
+constitutes a definitive empirical proof that TUTR's transformer social
+attention architecturally resolves the Freezing Predictor Effect, rendering
+explicit cooperative regularisation unnecessary for this model class.
+
+\subsection{RQ3: KL Latent Stability in SocialVAE}
+\label{sec:results:rq3}
+
+The KL term remains stable at \(0.023\)--\(0.026\) across all training set
+sizes (\(N_{\text{train}} \in \{500, 1000, 1500, 1845\}\)), confirming that
+ETH-UCY scale is insufficient to trigger KL collapse. Dynamic KL priors are
+unnecessary at this benchmark scale.
+
+\subsection{RQ4: Social Violation Rate --- Loss-Level Invariance}
+\label{sec:results:rq4}
+
+The 3-seed V0 baseline reveals a consistent density gradient: SVR is
+\(0.838\,\pm\,0.003\) for sparse ETH, rising to \(0.923\,\pm\,0.001\) on
+average and reaching \(0.989\,\pm\,0.000\) in the dense UNIV subset. This
+monotonic increase with crowd density is observed across all variants.
+
+Variants V1, V2, V3, and V1W produce SVR changes of at most \(0.003\)
+relative to V0 --- well within inter-seed noise. None of these loss formulations
+meaningfully reduces social violations. The ranking-aware variant V2R achieves
+a statistically significant reduction: 3-seed SVR\,\(=\,0.912\,\pm\,0.000\)
+versus V0 SVR\,\(=\,0.923\,\pm\,0.001\), a delta of \(-0.010\) that exceeds
+the \(3\sigma\) significance threshold (\(\pm 0.001\)). The effect is
+density-stratified: ETH (sparse) gains the largest reduction (\(-0.029\)),
+while UNIV (dense) is nearly invariant (\(-0.001\)).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{fig2_svr_density}
+  \caption{Social Violation Rate (SVR) stratified by density tier for V0
+           (3-seed mean\,\(\pm\)\,std) and V2R (3-seed mean\,\(\pm\)\,std).
+           SVR follows a consistent monotonic trend with crowd density.
+           V2R achieves a significant reduction in sparse and medium tiers
+           but is near-invariant in the dense UNIV subset.
+           ($n=5$ subsets; inferential statistics not reported.)}
+  \label{fig:svrdensity}
+\end{figure}
+
+\subsection{RQ5: Safe Planning Success Rate --- Safety--Accuracy Trade-off}
+\label{sec:results:rq5}
+
+The 3-seed V0 baseline achieves SPSR\,\(=\,0.819\,\pm\,0.002\) overall.
+SPSR is highest for medium-density subsets (HOTEL: \(0.919\,\pm\,0.001\);
+ZARA1: \(0.929\,\pm\,0.002\)) and lowest for the dense UNIV subset
+(\(0.660\,\pm\,0.001\)), reflecting the increasing difficulty of finding a
+collision-free, goal-reaching candidate as crowd density grows.
+
+The ranking-aware variant V2R yields the key finding of this work. Its
+3-seed SPSR is \(0.845\,\pm\,0.008\) overall, a statistically significant
+improvement of \(+0.026\) over V0 (threshold: \(\pm 0.024\)). The improvement
+is concentrated in medium and dense subsets: HOTEL \(+0.044\), UNIV
+\(+0.025\), ZARA2 \(+0.091\). ETH shows a slight regression (\(-0.028\)),
+consistent with its near-zero real neighbour density (61.8\% of ETH scenes
+contain no real neighbours after excluding the ego agent, making collision
+avoidance irrelevant but goal-reaching harder under the V2R trajectory shift).
+
+Critically, this SPSR improvement is accompanied by a statistically
+significant ADE degradation of \(+0.043\)\,m (\(+19.5\%\) relative, $3\sigma$
+above noise). V2R simultaneously reduces SVR, improves SPSR, and increases
+ADE --- a three-way trade-off that SPSR and SVR together surface but ADE/FDE
+alone cannot.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{fig_supp_spsr}
+  \caption{Safe Planning Success Rate (SPSR) per ETH-UCY fold for V0 and
+           V2R (3-seed mean\,\(\pm\)\,std). V2R improves SPSR in medium and
+           dense subsets while showing a slight regression in sparse ETH,
+           consistent with V2R's trajectory shift under low real-neighbour
+           density.}
+  \label{fig:spsr}
+\end{figure}
+
+\subsection{Ablation Summary}
+\label{sec:results:ablation}
+
+Table~\ref{tab:ablation} consolidates all results. The four novel metrics ---
+ECE, FPR, SVR, SPSR --- each reveal a distinct aspect of model behaviour
+invisible to ADE/FDE. FPR provides a definitive architectural safety
+certificate. ECE exposes systematic miscalibration that ADE does not. SVR
+quantifies social compliance of the deployed prediction. SPSR captures the
+planning utility of the full probability distribution and surfaces the
+safety--accuracy trade-off of V2R.
+
+% ============================================================
+% §7 DISCUSSION
+% ============================================================
+
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Why \(\mathcal{L}_{\text{ECE}}\) does not reduce ECE.}
+At each training step, trajectory regression gradient flows only through the
+minimum-displacement candidate --- the single sample closest to the ground
+truth. The remaining \(K-1\) candidates receive no trajectory gradient, so
+their probability scores are shaped almost entirely by the CLF-FC head's
+classification signal. \(\mathcal{L}_{\text{ECE}}\) can act on these scores
+but cannot redistribute trajectory diversity across all \(K\) candidates.
+Calibration ultimately requires that high-confidence predictions are
+empirically accurate, which requires diverse trajectories spanning the
+ground-truth distribution --- a property that winner-takes-all training
+actively suppresses. Sampling-based training objectives, in which all \(K\)
+candidates receive trajectory gradient proportionally to their predicted
+weight, are the natural architectural fix~\cite{karandikar2021soft}.
+
+\paragraph{Why FPR is identically zero.}
+TUTR's pairwise self-attention conditions each agent's prediction on the full
+set of neighbour token representations. This implicitly distributes candidates
+across the interaction-feasible space at every forward pass. The Freezing
+Predictor Effect was characterised for \emph{independent} Gaussian process
+planners~\cite{trautman2010unfreezing}, where agent coupling had to be
+engineered explicitly. In TUTR it is an emergent property of the attention
+mechanism. Reporting FPR for attention-based predictors nevertheless has
+value: it provides a reproducible reference for evaluating whether future
+architectural variants or distilled models preserve this immunity.
+
+\paragraph{Why V2R reduces SVR but dense scenes remain resistant.}
+The ranking-aware loss reduces SVR significantly in sparse scenes (ETH:
+\(-0.029\)) but is near-invariant in dense scenes (UNIV: \(-0.001\)). In
+dense scenes, social violations are pervasive across all \(K=20\) candidates,
+so penalising the top-ranked candidate creates gradient conflict with the
+regression objective without a compliant alternative to promote. In sparse
+scenes, compliant candidates exist, and the ranking pressure successfully
+shifts the top-1 selection toward them. Full SVR reduction in dense scenes
+requires architectural intervention at the candidate generation stage, not
+loss-level pressure.
+
+\paragraph{The safety--accuracy trade-off revealed by V2R.}
+V2R simultaneously improves SPSR (\(+0.026\)) and reduces SVR (\(-0.010\))
+while degrading ADE (\(+0.043\)\,m). This is not a failure of the loss design
+but a genuine structural trade-off: generating socially compliant trajectories
+requires deviating from the minimum-displacement path. The trade-off is
+invisible to ADE/FDE evaluation --- a model reporting ADE\,\(=\,0.265\) (V2R)
+versus ADE\,\(=\,0.222\) (V0) appears strictly worse under standard metrics,
+yet it delivers meaningfully better planning safety (SPSR \(+0.026\)) and
+social compliance (SVR \(-0.010\)). SPSR and SVR are therefore not
+supplementary metrics but necessary complements to ADE/FDE for deployment
+evaluation.
+
+Practitioners deploying trajectory predictors in safety-critical contexts
+face a concrete decision: the V0 baseline offers better trajectory accuracy
+but worse social compliance and planning safety; V2R offers better safety at
+a 19.5\% ADE cost. The SPSR and SVR metrics provide the decision-relevant
+signal; ADE/FDE do not.
+
+\paragraph{Limitations.}
+This study is constrained to ETH-UCY scale (\(N \leq 1845\) training
+trajectories) and a single 4\,GB GPU. FPE and KL collapse may manifest at
+larger scales (nuScenes, Waymo) where crowd density and data volume are
+substantially higher. SPSR is evaluated via a virtual planner; real robot
+deployment introduces sensor noise, latency, and actuation constraints absent
+from our evaluation. Multi-seed validation covers V0 and V2R only; V1, V2, V3,
+V1W results are single-seed (seed 42). These limitations are explicitly scoped:
+our contribution is a controlled audit at standard benchmark scale, a necessary
+precondition for larger-scale safety evaluation.
+
+% ============================================================
+% §8 CONCLUSION
+% ============================================================
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have conducted the first systematic calibration and safety audit of a
+transformer-based trajectory predictor, producing four contributions grounded
+in statistically validated experiments. Transformer self-attention
+architecturally resolves the Freezing Predictor Effect: FPR is identically
+\(0.000\) across all six variants, all five ETH-UCY subsets, and all density
+tiers --- a definitive empirical proof that FPE does not transfer to this model
+class. KL collapse does not occur in SocialVAE at ETH-UCY scale: the KL term
+remains stable at \(0.023\)--\(0.026\) across \(N_{\text{train}}=500\)--\(1845\),
+showing dynamic KL priors are unnecessary at standard benchmark scale.
+
+We establish the first ECE baseline in trajectory prediction
+(ECE\,\(=\,0.554\,\pm\,0.000\) for vanilla TUTR, 3-seed confirmed) and
+demonstrate that auxiliary calibration losses cannot reduce ECE in
+winner-takes-all predictors, identifying architectural change at the training
+objective as the necessary next step.
+
+Our most consequential finding is the safety--accuracy trade-off revealed by
+the ranking-aware variant V2R: a simultaneous SVR reduction of \(-0.010\) and
+SPSR improvement of \(+0.026\) (both statistically significant at \(3\sigma\),
+3-seed confirmed) is achievable, but at a cost of \(+0.043\)\,m ADE. This
+trade-off is invisible to standard ADE/FDE evaluation and measurable only
+through SVR and SPSR. Together, these metrics provide the first
+deployment-relevant safety and calibration characterisation of a
+state-of-the-art transformer trajectory predictor, and establish reproducible
+baselines against which future architectures can be evaluated for dense-crowd
+robot navigation.
+
+% ============================================================
+% BIBLIOGRAPHY
+% ============================================================
+\bibliographystyle{unsrt}
+\bibliography{ref}
+
+\end{document}

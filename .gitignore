@@ -1,0 +1,44 @@
+# Third-party repository
+TUTR/
+
+# Datasets
+data/raw/ethucy/
+data/raw/sdd/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Model checkpoints (optional)
+checkpoints/
+outputs/
+results/
+
+# Datasets
+dataset/
+data/raw/
+*.pkl
+*.pt
+*.pth
+*.ckpt

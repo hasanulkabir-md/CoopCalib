@@ -1,0 +1,68 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: unsrt.bst
+Reallocating 'name_of_file' (item size: 1) to 4 items.
+Database file #1: ref.bib
+Repeated entry---line 277 of file ref.bib
+ : @inproceedings{guo2017calibration
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 297 of file ref.bib
+ : @inproceedings{lucas2019elbo
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 318 of file ref.bib
+ : @inproceedings{mangalam2020pecnet
+ :                                  ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "niculescu2005predicting"
+Warning--I didn't find a database entry for "ovadia2019can"
+Warning--I didn't find a database entry for "helbing1995social"
+Warning--I didn't find a database entry for "alahi2016social"
+Warning--I didn't find a database entry for "gupta2018social"
+Warning--I didn't find a database entry for "salzmann2020trajectron"
+Warning--I didn't find a database entry for "ivanovic2019trajectron"
+You've used 15 entries,
+            1791 wiz_defined-function locations,
+            539 strings with 7086 characters,
+and the built_in function-call counts, 5340 in all, are:
+= -- 471
+> -- 237
+< -- 13
++ -- 84
+- -- 69
+* -- 349
+:= -- 730
+add.period$ -- 46
+call.type$ -- 15
+change.case$ -- 15
+chr.to.int$ -- 0
+cite$ -- 15
+duplicate$ -- 273
+empty$ -- 518
+format.name$ -- 69
+if$ -- 1263
+int.to.chr$ -- 0
+int.to.str$ -- 15
+missing$ -- 15
+newline$ -- 78
+num.names$ -- 15
+pop$ -- 79
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 187
+stack$ -- 0
+substring$ -- 408
+swap$ -- 131
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 46
+width$ -- 17
+write$ -- 168
+(There were 3 error messages)

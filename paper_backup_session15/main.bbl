@@ -1,0 +1,104 @@
+\begin{thebibliography}{10}
+
+\bibitem{shi2023tutr}
+Liushuai Shi, Le~Wang, Sanping Zhou, and Gang Hua.
+\newblock Trajectory unified transformer for pedestrian trajectory prediction.
+\newblock In {\em Proceedings of the IEEE/CVF International Conference on
+  Computer Vision (ICCV)}, pages 9675--9684, October 2023.
+
+\bibitem{mohamed2020social}
+Abduallah Mohamed, Kun Qian, Mohamed Elhoseiny, and Christian Claudel.
+\newblock {S}ocial-{STGCNN}: {A} social spatio-temporal graph convolutional
+  neural network for human trajectory prediction.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition (CVPR)}, pages 14424--14432, 2020.
+
+\bibitem{trautman2010unfreezing}
+Pete Trautman and Andreas Krause.
+\newblock Unfreezing the robot: {N}avigation in dense, interacting crowds.
+\newblock In {\em Proceedings of the IEEE/RSJ International Conference on
+  Intelligent Robots and Systems (IROS)}, pages 797--803, 2010.
+
+\bibitem{pellegrini2009eth}
+Stefano Pellegrini, Andreas Ess, Konrad Schindler, and Luc Van~Gool.
+\newblock You'll never walk alone: Modeling social behavior for multi-target
+  tracking.
+\newblock In {\em Proceedings of the IEEE International Conference on Computer
+  Vision (ICCV)}, pages 261--268, 2009.
+
+\bibitem{lerner2007ucy}
+Alon Lerner, Yiorgos Chrysanthou, and Dani Lischinski.
+\newblock Crowds by example.
+\newblock {\em Computer Graphics Forum}, 26(3):655--664, 2007.
+
+\bibitem{karandikar2021soft}
+Archit Karandikar, Nicholas Cain, Dustin Tran, Balaji Lakshminarayanan,
+  Jonathon Shlens, Michael~C. Mozer, and Becca Roelofs.
+\newblock Soft calibration objectives for neural networks.
+\newblock In {\em Advances in Neural Information Processing Systems (NeurIPS)},
+  volume~34, 2021.
+
+\bibitem{zhang2025openworld}
+Shan Zhang, Yao Ni, Jinhao Du, Yuan Xue, Philip Torr, Piotr Koniusz, and Anton
+  van~den Hengel.
+\newblock Open-world objectness modeling unifies novel object detection.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition (CVPR)}, pages 30332--30342, June 2025.
+
+\bibitem{xu2022socialvae}
+Pei Xu, Jean-Bernard Hayet, and Ioannis Karamouzas.
+\newblock {SocialVAE}: Human trajectory prediction using timewise latents.
+\newblock In {\em Computer Vision -- ECCV 2022}, volume 13664 of {\em Lecture
+  Notes in Computer Science}, pages 511--528. Springer, Cham, 2022.
+
+\bibitem{guo2017calibration}
+Chuan Guo, Geoff Pleiss, Yu~Sun, and Kilian~Q. Weinberger.
+\newblock On calibration of modern neural networks.
+\newblock In {\em Proceedings of the 34th International Conference on Machine
+  Learning}, volume~70 of {\em Proceedings of Machine Learning Research}, pages
+  1321--1330, 2017.
+
+\bibitem{bae2024singular}
+Inhwan Bae, Young-Jae Park, and Hae-Gon Jeon.
+\newblock {SingularTrajectory}: Universal trajectory predictor using diffusion
+  model.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition (CVPR)}, 2024.
+
+\bibitem{wong2024socialcircle}
+Conghao Wong, Beihao Xia, Ziqian Zou, Yulong Wang, and Xinge You.
+\newblock {SocialCircle}: Learning the angle-based social interaction
+  representation for pedestrian trajectory prediction.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition (CVPR)}, 2024.
+
+\bibitem{liu2024diftraj}
+Yunlong Liu, Changsheng Shi, Yunji Ye, and Jianping Yin.
+\newblock {DifTraj}: Diffusion inspired joint crowd trajectory predictor and
+  refiner.
+\newblock In {\em Proceedings of the International Joint Conference on
+  Artificial Intelligence (IJCAI)}, 2024.
+
+\bibitem{lucas2019elbo}
+James Lucas, George Tucker, Roger Grosse, and Mohammad Norouzi.
+\newblock Don't blame the {ELBO}! {A} linear {VAE} perspective on posterior
+  collapse.
+\newblock In {\em Advances in Neural Information Processing Systems},
+  volume~32, pages 13624--13634, 2019.
+
+\bibitem{mangalam2020pecnet}
+Karttikeya Mangalam, Harshayu Girase, Shreyas Agarwal, Kuan-Hui Lee, Ehsan
+  Adeli, Jitendra Malik, and Adrien Gaidon.
+\newblock It is not the journey but the destination: Endpoint conditioned
+  trajectory prediction.
+\newblock In {\em European Conference on Computer Vision}, pages 759--776,
+  2020.
+
+\bibitem{xie2024dtgan}
+Jiajia Xie, Sheng Zhang, Beihao Xia, Zhu Xiao, Hongbo Jiang, Siwang Zhou, Zheng
+  Qin, and Hongyang Chen.
+\newblock Pedestrian trajectory prediction based on social interactions
+  learning with random weights.
+\newblock {\em IEEE Transactions on Multimedia}, 26:7503--7515, 2024.
+
+\end{thebibliography}
